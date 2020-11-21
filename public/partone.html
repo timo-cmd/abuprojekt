@@ -1,0 +1,534 @@
+<html>
+    <head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://www.w3schools.com/lib/w3.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/smoothscroll/1.4.4/SmoothScroll.min.js"></script>
+<style>
+
+body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif;}
+    body, html {
+        height: 100%;
+        color: #777;
+        line-height: 1.8;
+    }
+    
+    /*Navbar Styles*/
+    .w3-navbar { color: #fff; }
+    .w3-navbar.w3-animate-top { color: #444; }
+    .w3-navbar li a:hover { background-color: rgba(0,0,0,0.2); color: #fff; }
+    
+    /* Create a Parallax Effect */
+    .bgimg-1, .bgimg-2, .bgimg-3 {
+        opacity: 0.7;
+        background-attachment: fixed;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+    
+    /* First image (Logo. Full height) */
+    .bgimg-1 {
+        background-image: url('https://images.wallpaperscraft.com/image/mountains_peak_alps_138007_3840x2400.jpg');
+        min-height: 100%;
+    }
+
+    
+    .w3-wide {letter-spacing: 10px;}
+    .w3-hover-opacity {cursor: pointer;}
+    
+    #googleMap {
+        width: 100%;
+        height: 400px;
+        -webkit-filter: grayscale(1);
+        filter: grayscale(1);
+    }
+    
+    /* Turn off parallax scrolling for tablets and mobiles */
+    @media only screen and (max-width: 1024px) {
+        .bgimg-1, .bgimg-2, .bgimg-3 {
+            background-attachment: scroll;
+        }
+    }
+    
+    /* About Section */
+    #about {
+      font-size: 1.4em;
+    }
+    
+    /* Heart Icon */
+    .heart-icon {
+      color: #f77;
+    }
+    
+    
+    /* Clearfix Hack */
+    .cf:before,
+    .cf:after {
+        content: " "; /* 1 */
+        display: table; /* 2 */
+    }
+    
+    .cf:after {
+        clear: both;
+    }
+    
+    /**
+     * For IE 6/7 only
+     * Include this rule to trigger hasLayout and contain floats.
+     */
+    .cf {
+        *zoom: 1;
+    }
+    
+    /* Social Media Icons */
+    .w3-half > a {
+      text-decoration: none;
+    }
+    
+    i.fa {
+      padding-top: .2em;
+      padding-left: .5em;
+      padding-right: .5em;
+      taransition: color 1s;
+    }
+    
+    .fa-fire:hover {
+      color: #4a4;
+    }
+    
+    .fa-facebook:hover {
+      color: #04a;
+    }
+    
+    .fa-codepen:hover {
+      color: #4af;
+    }
+    
+    #profile { vertical-align: middle; }
+
+       
+ol,
+ul,
+li {
+  margin: 0;
+  padding: 0;
+}
+
+.toc { padding: 2.4rem; margin:2.4rem;}
+.toc,
+.toc ol > li:before,
+.chapter {
+  position: relative;
+  z-index: 2; }
+
+.toc ol {
+  counter-reset: item;
+  position: relative; }
+  .toc ol > li:before {
+    content: counters(item, ".") ". ";
+    display: table-cell;
+    padding-right: .8rem;
+    width: 2.4rem; }
+  .toc ol li li:before {
+    content: counters(item, ".") " "; }
+
+.toc li {
+  counter-increment: item;
+  display: table;
+  font-weight: 400;
+  margin-bottom: .8rem;
+  margin-left: 0;
+  -webkit-transition: .3s;
+  transition: .3s;
+  width: 100%; }
+  .toc li li {
+    font-weight: 300;
+    margin-bottom: 0;
+    margin-left: 0; }
+  .toc li .toc-page:before {
+    content: '';
+    display: block;
+    left: 0;
+    margin-top: 1.8rem;
+    position: absolute;
+    right: 4rem; }
+  .toc li > a {
+    display: inline-block;
+    width: 100%; }
+  .toc li a:hover span {
+    font-weight: 600; }
+  .toc li a:hover .toc-page:before {
+    border-bottom-width: 2px; }
+
+.chapter {
+  display: inline-block;
+  font-size: 1.8rem;
+  line-height: 3.2rem;
+  padding-right: .8rem; }
+
+.toc-page {
+  float: right; }
+
+/*=== Colors === */
+.toc,
+.toc ol > li:before,
+.chapter {
+  background-color: #f7f9fb; }
+
+.toc li .toc-page:before {
+  border-bottom: 1px dotted rgba(0, 0, 0, 0.9); }
+    </style>
+    </head>
+    <body>
+    <script>
+         // Smooth Scroll on anchor links
+(function() {
+
+'use strict';
+
+// Feature Test
+if ( 'querySelector' in document && 'addEventListener' in window && Array.prototype.forEach ) {
+
+   // Function to animate the scroll
+   var smoothScroll = function (anchor, duration) {
+
+       // Calculate how far and how fast to scroll
+       var startLocation = window.pageYOffset;
+       var endLocation = anchor.offsetTop;
+       var distance = endLocation - startLocation;
+       var increments = distance/(duration/16);
+       var stopAnimation;
+
+       // Scroll the page by an increment, and check if it's time to stop
+       var animateScroll = function () {
+           window.scrollBy(0, increments);
+           stopAnimation();
+       };
+
+       // If scrolling down
+       if ( increments >= 0 ) {
+           // Stop animation when you reach the anchor OR the bottom of the page
+           stopAnimation = function () {
+               var travelled = window.pageYOffset;
+               if ( (travelled >= (endLocation - increments)) || ((window.innerHeight + travelled) >= document.body.offsetHeight) ) {
+                   clearInterval(runAnimation);
+               }
+           };
+       }
+       // If scrolling up
+       else {
+           // Stop animation when you reach the anchor OR the top of the page
+           stopAnimation = function () {
+               var travelled = window.pageYOffset;
+               if ( travelled <= (endLocation || 0) ) {
+                   clearInterval(runAnimation);
+               }
+           };
+       }
+
+       // Loop the animation function
+       var runAnimation = setInterval(animateScroll, 16);
+  
+   };
+
+   // Define smooth scroll links
+   var scrollToggle = document.querySelectorAll('.scroll');
+
+   // For each smooth scroll link
+   [].forEach.call(scrollToggle, function (toggle) {
+
+       // When the smooth scroll link is clicked
+       toggle.addEventListener('click', function(e) {
+
+           // Prevent the default link behavior
+           e.preventDefault();
+
+           // Get anchor link and calculate distance from the top
+           var dataID = toggle.getAttribute('href');
+           var dataTarget = document.querySelector(dataID);
+           var dataSpeed = toggle.getAttribute('data-speed');
+
+           // If the anchor exists
+           if (dataTarget) {
+               // Scroll to the anchor
+               smoothScroll(dataTarget, dataSpeed || 500);
+           }
+
+       }, false);
+
+   });
+
+}
+
+})();
+
+//Smooth Scroll
+SmoothScroll({
+// Scrolling Core
+animationTime    : 400, // [ms]
+stepSize         : 100, // [px]
+
+// Acceleration
+accelerationDelta : 50,  // 50
+accelerationMax   : 3,   // 3
+
+// Keyboard Settings
+keyboardSupport   : true,  // option
+arrowScroll       : 50,    // [px]
+
+// Pulse (less tweakable)
+// ratio of "tail" to "acceleration"
+pulseAlgorithm   : true,
+pulseScale       : 4,
+pulseNormalize   : 1,
+
+// Other
+touchpadSupport   : false, // ignore touchpad by default
+fixedBackground   : true, 
+excluded          : ''    
+});
+
+// Google Maps
+var myCenter = new google.maps.LatLng(9.9150603, 122.8321918);
+
+function initialize() {
+var mapProp = {
+center: myCenter,
+zoom: 12,
+scrollwheel: false,
+draggable: false,
+mapTypeId: google.maps.MapTypeId.ROADMAP
+};
+
+var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
+
+var marker = new google.maps.Marker({
+position: myCenter,
+});
+
+marker.setMap(map);
+}
+
+google.maps.event.addDomListener(window, 'load', initialize);
+
+// Modal Image Gallery
+function onClick(element) {
+document.getElementById("img01").src = element.src;
+document.getElementById("modal01").style.display = "block";
+}
+
+// Change style of navbar on scroll
+window.onscroll = function() {
+myFunction()
+};
+
+function myFunction() {
+var navbar = document.getElementById("myNavbar");
+if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+navbar.className = "w3-navbar" + " w3-card-2" + " w3-animate-top" + " w3-white";
+} else {
+navbar.className = navbar.className.replace(" w3-card-2 w3-animate-top w3-white", "");
+}
+}
+
+    </script>
+<div class="w3-top">
+    <ul class="w3-navbar" id="myNavbar">
+      <li><a href="#" class="w3-padding-large"></a></li>
+      <li class="w3-hide-small w3-right">
+        <a href="#contact" class="w3-padding-large"></a>
+      </li>
+      <li class="w3-hide-small w3-right">
+        <a href="#portfolio" class="w3-padding-large"></a>
+      </li>
+      <li class="w3-hide-small w3-right">
+        <a href="#about" class="w3-padding-large"></a>
+      </li>
+    </ul>
+  </div>
+  
+  <!-- First Parallax Image with Logo Text -->
+  <div class="bgimg-1 w3-opacity w3-display-container">
+    <div class="w3-display-middle" style="white-space:nowrap;">
+      <h1 class="w3-center w3-padding-xlarge w3-black w3-xlarge w3-wide w3-animate-opacity">Abu Project 2020 Perlen Papier AG<span class="w3-hide-small"><br>Developed by Timo Sarkar</span></h1>
+    </div>
+  </div>
+  
+  <!-- Container (About Section) -->
+  <div class="w3-content w3-container w3-padding-64" id="about">
+    <h2 class="w3-center">Perlen papier AG - Timeline</h2>
+    <p>
+      <li>The company was founded in 1873</li>
+      <li>Integration to the CPH Holding (1971)</li>
+      <li>Produced over 100'000 tons of paper (1971)</li>
+      <li>Perlen papier introduces the TMP (Thermo Mechanical Pulp) machine used for wood generation</li>
+      <li>Produces paper using the PM4 (Papier Maschine 4) (2000)</li>
+      <li>The new PM7 becomes one of the worlds most advanced paper machine. (2010)</li>
+      <li>Perlen papier becomes european leader in electricity and heat efficiency. (2015)</li>
+    </p><br>
+    <h2 class="w3-center">Perlen papier AG - Characteristics</h2>
+    <p>
+      <li>Most modern Paper producing company of europe</li>
+          <li>includes about ~ 400 eployees</li>
+          <li>560'000 Tons of paper per year</li>
+          <li>FSC, PEFC, ISO, EcoLabel certified company</li>
+          <li>uses modern technologies ( such ones that are powered by this site :))</li>
+    </p><br>
+    <h2 class="w3-center">Perlen papier AG - Products</h2>
+    <p>
+      <li>Perlen Press paper</li>
+        <li>Perlen Snowpaper</li>
+        <li>Perlen Snowprint paper</li>
+        <li>Perlen Joy paper</li>
+        <li>Perlen Top gloss</li>
+        <li>Perlen Top satin</li>
+        <li>Perlen Value paper</li>
+        <li>Perlen Edelweiss paper</li>
+    </p><br>
+    <h2 class="w3-center">Perlen papier AG - Future Aims</h2>
+    <p>
+      <li>Expand the market position worldwide</li>
+        <li>Reduce emissions by at least 50%</li>
+        <li>Use renewable energy</li>
+    </p><br>
+    <section>
+      <br>
+      <h2 class="w3-center">Perlen papier AG - Aims</h2>
+      <p>The aims of Perlen Papier AG are:<br><li>Provide high-quality paper</li>
+      <li>Use the most modern Paper machine of the world (PM7)</li>
+      <li>Provide high-quality medical capsules</li></p>
+      <br>
+      <h2 class="w3-center">Perlen papier AG - clients</h2>
+      <p>Most of Perlen Papier's clients are either Corporations or smaller KMU's.</p><br>
+      
+     <h2 class="w3-center">Perlen papier AG - Facts</h2>
+   <div class="facts_wrapper">
+       <div class="row justify-content-between">
+           
+           <div class="col-12 col-md-4 text-center">
+               <span class="number_big counter">524.7</span>
+               <span><a href="--investoren/wichtigste-zahlen/" target="_blank">sales 2019 in CHF Mio.</a></span>
+           </div>
+           
+           <div class="col-12 col-md-4 text-center">
+               <span class="number_big counter">3</span>
+               <span><a href="--geschäftsbereiche/" target="_blank">Branch-departments</a></span>
+           </div>
+           
+           <div class="col-12 col-md-4 text-center">
+               <span class="number_big counter">1086</span>
+               <span><a href="--karriere/" target="_blank">Employees</a></span>
+           </div>
+           
+       </div>
+   </div>
+   <div class="spacer line"></div>
+ </section>
+    <div class="toc">
+      <h2>Table of Contents</h2>
+      <ol>
+        <li>
+          <a href="index.html" title="Go to Learning to see">
+            <span class="chapter">Abu Project 2020 - About</span>
+            <span class="toc-page">01</span>
+          </a>
+        </li>
+  
+        <li><a href="partone.html" title=""><span class="chapter"><strong><em>Abu Project 2020 - Part 1</em></strong></span>
+          <span class="toc-page">02</span></a>
+        </li>
+        <li><a href="parttwo.html" title=""><span class="chapter">Abu Project 2020 - Part 2</span>
+          <span class="toc-page">03</span></a>
+  
+            <li><a href="licensing.html" title=""><span class="chapter">Abu project 2020 - Licensing</span>
+              <span class="toc-page">04</span></a></li>
+        </li>
+      </ol>
+    </div>
+  <br></br>
+  <!--  Profile Picture and Description  -->
+</div>
+
+    <!--  Profile Picture and Description  -->
+  </div>
+  
+  <!-- Second Parallax Image with Portfolio Text --><!--
+  <div class="bgimg-2 w3-display-container" id="portfolio">
+    <div class="w3-display-middle">
+      <span class="w3-xxlarge w3-text-light-grey w3-wide">PO</span>
+    </div>
+  </div>
+  
+  <div class="w3-content w3-container w3-padding-64">
+    <h2 class="w3-center">MYK</h2>
+    <p class="w3-center"><em>Her<br> Click on the images to make them bigger</em></p><br>
+  
+    <div class="w3-row-padding w3-center">
+      <div class="w3-col m3">
+        <img src="https://unsplash.om" style="width:100%" onclick="onClick(this)" class="w3-hover-opacity">
+      </div>
+  
+      <div class="w3-col m3">
+        <img src="https://unspl01?random" style="width:100%" onclick="onClick(this)" class="w3-hover-opacity">
+      </div>
+  
+      <div class="w3-col m3">
+        <img src="https://?random" style="width:100%" onclick="onClick(this)" class="w3-hover-opacity">
+      </div>
+  
+      <div class="w3-col m3">
+        <img src="https://unsplndom" style="width:100%" onclick="onClick(this)" class="w3-hover-opacity">
+      </div>
+    </div>
+  
+    <div class="w3-row-padding w3-center w3-section">
+      <div class="w3-col m3">
+        <img src="https://random" style="width:100%" onclick="onClick(this)" class="w3-hover-opacity">
+      </div>
+  
+      <div class="w3-col m3">
+        <img src="https://urandom" style="width:100%" onclick="onClick(this)" class="w3-hover-opacity">
+      </div>
+  
+      <div class="w3-col m3">
+        <img src="https://unndom" style="width:100%" onclick="onClick(this)" class="w3-hover-opacity">
+      </div>
+  
+      <div class="w3-col m3">
+        <img src="https://urandom" style="width:100%" onclick="onClick(this)" class="w3-hover-opacity">
+      </div>
+    </div>
+  </div>
+  
+  <div id="modal01" class="w3-modal w3-black" onclick="this.style.display='none'">
+    <span class="w3-closebtn w3-hover-red w3-text-white w3-xxxlarge w3-container w3-display-topright">×</span>
+    <div class="w3-modal-content w3-animate-zoom w3-center w3-transparent w3-padding-64">
+      <img id="img01" style="max-width:100%">
+    </div>
+  </div>
+  
+  <div class="bgimg-3 w3-display-container" id="contact">
+    <div class="w3-display-middle">
+      <h2 class="w3-xxlarge w3-text-light-grey w3-wide">CT</h2>
+    </div>
+  </div>
+  
+  <div class="w3-content w3-container w3-padding-64">
+    <h3 class="w3-center">WHERK</h3>
+    <p class="w3-center"><em>I'd loveack!</em></p>
+  
+   
+  </div>
+  
+  -->
+  <footer class="w3-center w3-dark-grey w3-padding-48 w3-hover-black cf">
+    <div class="w3-half">
+      <a target="_blank" href="">
+      </a>
+      <a target="_blank" href="">
+      </a>
+    </div>
+    <p class="w3-half">Made with <span class="heart-icon">❤</span> by Timo Sarkar and Powered by <a href="https://expressjs.com/" title="express.js" target="_blank" class="w3-hover-opacity">express.js</a></p>
+  </footer>
+</body>
+</html>

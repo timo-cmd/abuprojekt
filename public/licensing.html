@@ -1,0 +1,665 @@
+<div id="index">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/lib/w3.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/smoothscroll/1.4.4/SmoothScroll.min.js"></script>
+    <style>
+    
+    #index,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif;}
+        #index {
+            height: 100%;
+            color: #777;
+            line-height: 1.8;
+        }
+        
+        /*Navbar Styles*/
+        .w3-navbar { color: #fff; }
+        .w3-navbar.w3-animate-top { color: #444; }
+        .w3-navbar li a:hover { background-color: rgba(0,0,0,0.2); color: #fff; }
+        
+        /* Create a Parallax Effect */
+        .bgimg-1, .bgimg-2, .bgimg-3 {
+            opacity: 0.7;
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        
+        /* First image (Logo. Full height) */
+        .bgimg-1 {
+            background-image: url('https://cdn.shopify.com/s/files/1/0012/4393/8877/files/Office_Wallpaper_Banner.jpg?11543310328790733081 ');
+            min-height: 100%;
+        }
+        
+        .w3-wide {letter-spacing: 10px;}
+        .w3-hover-opacity {cursor: pointer;}
+        
+        #googleMap {
+            width: 100%;
+            height: 400px;
+            -webkit-filter: grayscale(1);
+            filter: grayscale(1);
+        }
+        
+        /* Turn off parallax scrolling for tablets and mobiles */
+        @media only screen and (max-width: 1024px) {
+            .bgimg-1, .bgimg-2, .bgimg-3 {
+                background-attachment: scroll;
+            }
+        }
+        
+        /* About Section */
+        #about {
+          font-size: 1.4em;
+        }
+        
+        /* Heart Icon */
+        .heart-icon {
+          color: #f77;
+        }
+        
+        
+        /* Clearfix Hack */
+        .cf:before,
+        .cf:after {
+            content: " "; /* 1 */
+            display: table; /* 2 */
+        }
+        
+        .cf:after {
+            clear: both;
+        }
+        
+        /**
+         * For IE 6/7 only
+         * Include this rule to trigger hasLayout and contain floats.
+         */
+        .cf {
+            *zoom: 1;
+        }
+        
+        /* Social Media Icons */
+        .w3-half > a {
+          text-decoration: none;
+        }
+        
+        i.fa {
+          padding-top: .2em;
+          padding-left: .5em;
+          padding-right: .5em;
+          taransition: color 1s;
+        }
+        
+        .fa-fire:hover {
+          color: #4a4;
+        }
+        
+        .fa-facebook:hover {
+          color: #04a;
+        }
+        
+        .fa-codepen:hover {
+          color: #4af;
+        }
+        
+        #profile { vertical-align: middle; }
+    
+        
+    ol,
+    ul,
+    li {
+      margin: 0;
+      padding: 0;
+    }
+    
+    .toc { padding: 2.4rem; margin:2.4rem;}
+    .toc,
+    .toc ol > li:before,
+    .chapter {
+      position: relative;
+      z-index: 2; }
+    
+    .toc ol {
+      counter-reset: item;
+      position: relative; }
+      .toc ol > li:before {
+        content: counters(item, ".") ". ";
+        display: table-cell;
+        padding-right: .8rem;
+        width: 2.4rem; }
+      .toc ol li li:before {
+        content: counters(item, ".") " "; }
+    
+    .toc li {
+      counter-increment: item;
+      display: table;
+      font-weight: 400;
+      margin-bottom: .8rem;
+      margin-left: 0;
+      -webkit-transition: .3s;
+      transition: .3s;
+      width: 100%; }
+      .toc li li {
+        font-weight: 300;
+        margin-bottom: 0;
+        margin-left: 0; }
+      .toc li .toc-page:before {
+        content: '';
+        display: block;
+        left: 0;
+        margin-top: 1.8rem;
+        position: absolute;
+        right: 4rem; }
+      .toc li > a {
+        display: inline-block;
+        width: 100%; }
+      .toc li a:hover span {
+        font-weight: 600; }
+      .toc li a:hover .toc-page:before {
+        border-bottom-width: 2px; }
+    
+    .chapter {
+      display: inline-block;
+      font-size: 1.8rem;
+      line-height: 3.2rem;
+      padding-right: .8rem; }
+    
+    .toc-page {
+      float: right; }
+    
+    /*=== Colors === */
+    .toc,
+    .toc ol > li:before,
+    .chapter {
+      background-color: #f7f9fb; }
+    
+    .toc li .toc-page:before {
+      border-bottom: 1px dotted rgba(0, 0, 0, 0.9); }
+        </style>
+        <script>
+             // Smooth Scroll on anchor links
+    (function() {
+    
+    'use strict';
+    
+    // Feature Test
+    if ( 'querySelector' in document && 'addEventListener' in window && Array.prototype.forEach ) {
+    
+       // Function to animate the scroll
+       var smoothScroll = function (anchor, duration) {
+    
+           // Calculate how far and how fast to scroll
+           var startLocation = window.pageYOffset;
+           var endLocation = anchor.offsetTop;
+           var distance = endLocation - startLocation;
+           var increments = distance/(duration/16);
+           var stopAnimation;
+    
+           // Scroll the page by an increment, and check if it's time to stop
+           var animateScroll = function () {
+               window.scrollBy(0, increments);
+               stopAnimation();
+           };
+    
+           // If scrolling down
+           if ( increments >= 0 ) {
+               // Stop animation when you reach the anchor OR the bottom of the page
+               stopAnimation = function () {
+                   var travelled = window.pageYOffset;
+                   if ( (travelled >= (endLocation - increments)) || ((window.innerHeight + travelled) >= document.body.offsetHeight) ) {
+                       clearInterval(runAnimation);
+                   }
+               };
+           }
+           // If scrolling up
+           else {
+               // Stop animation when you reach the anchor OR the top of the page
+               stopAnimation = function () {
+                   var travelled = window.pageYOffset;
+                   if ( travelled <= (endLocation || 0) ) {
+                       clearInterval(runAnimation);
+                   }
+               };
+           }
+    
+           // Loop the animation function
+           var runAnimation = setInterval(animateScroll, 16);
+      
+       };
+    
+       // Define smooth scroll links
+       var scrollToggle = document.querySelectorAll('.scroll');
+    
+       // For each smooth scroll link
+       [].forEach.call(scrollToggle, function (toggle) {
+    
+           // When the smooth scroll link is clicked
+           toggle.addEventListener('click', function(e) {
+    
+               // Prevent the default link behavior
+               e.preventDefault();
+    
+               // Get anchor link and calculate distance from the top
+               var dataID = toggle.getAttribute('href');
+               var dataTarget = document.querySelector(dataID);
+               var dataSpeed = toggle.getAttribute('data-speed');
+    
+               // If the anchor exists
+               if (dataTarget) {
+                   // Scroll to the anchor
+                   smoothScroll(dataTarget, dataSpeed || 500);
+               }
+    
+           }, false);
+    
+       });
+    
+    }
+    
+    })();
+    
+    //Smooth Scroll
+    SmoothScroll({
+    // Scrolling Core
+    animationTime    : 400, // [ms]
+    stepSize         : 100, // [px]
+    
+    // Acceleration
+    accelerationDelta : 50,  // 50
+    accelerationMax   : 3,   // 3
+    
+    // Keyboard Settings
+    keyboardSupport   : true,  // option
+    arrowScroll       : 50,    // [px]
+    
+    // Pulse (less tweakable)
+    // ratio of "tail" to "acceleration"
+    pulseAlgorithm   : true,
+    pulseScale       : 4,
+    pulseNormalize   : 1,
+    
+    // Other
+    touchpadSupport   : false, // ignore touchpad by default
+    fixedBackground   : true, 
+    excluded          : ''    
+    });
+    
+    // Google Maps
+    var myCenter = new google.maps.LatLng(9.9150603, 122.8321918);
+    
+    function initialize() {
+    var mapProp = {
+    center: myCenter,
+    zoom: 12,
+    scrollwheel: false,
+    draggable: false,
+    mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
+    
+    var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
+    
+    var marker = new google.maps.Marker({
+    position: myCenter,
+    });
+    
+    marker.setMap(map);
+    }
+    
+    google.maps.event.addDomListener(window, 'load', initialize);
+    
+    // Modal Image Gallery
+    function onClick(element) {
+    document.getElementById("img01").src = element.src;
+    document.getElementById("modal01").style.display = "block";
+    }
+    
+    // Change style of navbar on scroll
+    window.onscroll = function() {
+    myFunction()
+    };
+    
+    function myFunction() {
+    var navbar = document.getElementById("myNavbar");
+    if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+    navbar.className = "w3-navbar" + " w3-card-2" + " w3-animate-top" + " w3-white";
+    } else {
+    navbar.className = navbar.className.replace(" w3-card-2 w3-animate-top w3-white", "");
+    }
+    }
+    
+        </script>
+    <div class="w3-top">
+        <ul class="w3-navbar" id="myNavbar">
+          <li><a href="#" class="w3-padding-large"></a></li>
+          <li class="w3-hide-small w3-right">
+            <a href="#contact" class="w3-padding-large"></a>
+          </li>
+          <li class="w3-hide-small w3-right">
+            <a href="#portfolio" class="w3-padding-large"></a>
+          </li>
+          <li class="w3-hide-small w3-right">
+            <a href="#about" class="w3-padding-large"></a>
+          </li>
+        </ul>
+      </div>
+      
+      <!-- First Parallax Image with Logo Text -->
+      <div class="bgimg-1 w3-opacity w3-display-container">
+        <div class="w3-display-middle" style="white-space:nowrap;">
+          <h1 class="w3-center w3-padding-xlarge w3-black w3-xlarge w3-wide w3-animate-opacity">Abu Project 2020 Perlen Papier AG<span class="w3-hide-small"><br>Developed by Timo Sarkar</span></h1>
+        </div>
+      </div>
+      
+      <!-- Container (About Section) -->
+      <div class="w3-content w3-container w3-padding-64" id="about">
+       
+        <p style=" margin: 0 auto;text-align: center; width: 30em;"><strong>Apache License</strong><br>
+            Version 2.0, January 2004<br>
+         http://www.apache.org/licenses/</span><br></br></p>
+        <p  style=" margin: 0 auto;text-align: justify;width: 30em;">
+
+TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION<br></br>
+
+1. Definitions.<br></br>
+
+"License" shall mean the terms and conditions for use, reproduction,
+and distribution as defined by Sections 1 through 9 of this document.<br></br>
+
+"Licensor" shall mean the copyright owner or entity authorized by
+the copyright owner that is granting the License.<br></br>
+
+"Legal Entity" shall mean the union of the acting entity and all
+other entities that control, are controlled by, or are under common
+control with that entity. For the purposes of this definition,
+"control" means (i) the power, direct or indirect, to cause the
+direction or management of such entity, whether by contract or
+otherwise, or (ii) ownership of fifty percent (50%) or more of the
+outstanding shares, or (iii) beneficial ownership of such entity.<br></br>
+
+"You" (or "Your") shall mean an individual or Legal Entity
+exercising permissions granted by this License.<br></br>
+
+"Source" form shall mean the preferred form for making modifications,
+including but not limited to software source code, documentation
+source, and configuration files.<br></br>
+
+"Object" form shall mean any form resulting from mechanical
+transformation or translation of a Source form, including but
+not limited to compiled object code, generated documentation,
+and conversions to other media types.<br></br>
+
+"Work" shall mean the work of authorship, whether in Source or
+Object form, made available under the License, as indicated by a
+copyright notice that is included in or attached to the work
+(an example is provided in the Appendix below).<br></br>
+
+"Derivative Works" shall mean any work, whether in Source or Object
+form, that is based on (or derived from) the Work and for which the
+editorial revisions, annotations, elaborations, or other modifications
+represent, as a whole, an original work of authorship. For the purposes
+of this License, Derivative Works shall not include works that remain
+separable from, or merely link (or bind by name) to the interfaces of,
+the Work and Derivative Works thereof.<br></br>
+
+"Contribution" shall mean any work of authorship, including
+the original version of the Work and any modifications or additions
+to that Work or Derivative Works thereof, that is intentionally
+submitted to Licensor for inclusion in the Work by the copyright owner
+or by an individual or Legal Entity authorized to submit on behalf of
+the copyright owner. For the purposes of this definition, "submitted"
+means any form of electronic, verbal, or written communication sent
+to the Licensor or its representatives, including but not limited to
+communication on electronic mailing lists, source code control systems,
+and issue tracking systems that are managed by, or on behalf of, the
+Licensor for the purpose of discussing and improving the Work, but
+excluding communication that is conspicuously marked or otherwise
+designated in writing by the copyright owner as "Not a Contribution."
+<br></br>
+"Contributor" shall mean Licensor and any individual or Legal Entity
+on behalf of whom a Contribution has been received by Licensor and
+subsequently incorporated within the Work.
+<br></br>
+2. Grant of Copyright License. Subject to the terms and conditions of
+this License, each Contributor hereby grants to You a perpetual,
+worldwide, non-exclusive, no-charge, royalty-free, irrevocable
+copyright license to reproduce, prepare Derivative Works of,
+publicly display, publicly perform, sublicense, and distribute the
+Work and such Derivative Works in Source or Object form.
+<br></br>
+3. Grant of Patent License. Subject to the terms and conditions of
+this License, each Contributor hereby grants to You a perpetual,
+worldwide, non-exclusive, no-charge, royalty-free, irrevocable
+(except as stated in this section) patent license to make, have made,
+use, offer to sell, sell, import, and otherwise transfer the Work,
+where such license applies only to those patent claims licensable
+by such Contributor that are necessarily infringed by their
+Contribution(s) alone or by combination of their Contribution(s)
+with the Work to which such Contribution(s) was submitted. If You
+institute patent litigation against any entity (including a
+cross-claim or counterclaim in a lawsuit) alleging that the Work
+or a Contribution incorporated within the Work constitutes direct
+or contributory patent infringement, then any patent licenses
+granted to You under this License for that Work shall terminate
+as of the date such litigation is filed.
+<br></br>
+4. Redistribution. You may reproduce and distribute copies of the
+Work or Derivative Works thereof in any medium, with or without
+modifications, and in Source or Object form, provided that You
+meet the following conditions:
+<br></br>
+(a) You must give any other recipients of the Work or
+Derivative Works a copy of this License; and
+<br></br>
+(b) You must cause any modified files to carry prominent notices
+stating that You changed the files; and
+<br></br>
+(c) You must retain, in the Source form of any Derivative Works
+that You distribute, all copyright, patent, trademark, and
+attribution notices from the Source form of the Work,
+excluding those notices that do not pertain to any part of
+the Derivative Works; and
+<br></br>
+(d) If the Work includes a "NOTICE" text file as part of its
+distribution, then any Derivative Works that You distribute must
+include a readable copy of the attribution notices contained
+within such NOTICE file, excluding those notices that do not
+pertain to any part of the Derivative Works, in at least one
+of the following places: within a NOTICE text file distributed
+as part of the Derivative Works; within the Source form or
+documentation, if provided along with the Derivative Works; or,
+within a display generated by the Derivative Works, if and
+wherever such third-party notices normally appear. The contents
+of the NOTICE file are for informational purposes only and
+do not modify the License. You may add Your own attribution
+notices within Derivative Works that You distribute, alongside
+or as an addendum to the NOTICE text from the Work, provided
+that such additional attribution notices cannot be construed
+as modifying the License.
+<br></br>
+You may add Your own copyright statement to Your modifications and
+may provide additional or different license terms and conditions
+for use, reproduction, or distribution of Your modifications, or
+for any such Derivative Works as a whole, provided Your use,
+reproduction, and distribution of the Work otherwise complies with
+the conditions stated in this License.
+<br></br>
+5. Submission of Contributions. Unless You explicitly state otherwise,
+any Contribution intentionally submitted for inclusion in the Work
+by You to the Licensor shall be under the terms and conditions of
+this License, without any additional terms or conditions.
+Notwithstanding the above, nothing herein shall supersede or modify
+the terms of any separate license agreement you may have executed
+with Licensor regarding such Contributions.
+<br></br>
+6. Trademarks. This License does not grant permission to use the trade
+names, trademarks, service marks, or product names of the Licensor,
+except as required for reasonable and customary use in describing the
+origin of the Work and reproducing the content of the NOTICE file.
+
+7. Disclaimer of Warranty. Unless required by applicable law or
+agreed to in writing, Licensor provides the Work (and each
+Contributor provides its Contributions) on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
+implied, including, without limitation, any warranties or conditions
+of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A
+PARTICULAR PURPOSE. You are solely responsible for determining the
+appropriateness of using or redistributing the Work and assume any
+risks associated with Your exercise of permissions under this License.
+<br></br>
+8. Limitation of Liability. In no event and under no legal theory,
+whether in tort (including negligence), contract, or otherwise,
+unless required by applicable law (such as deliberate and grossly
+negligent acts) or agreed to in writing, shall any Contributor be
+liable to You for damages, including any direct, indirect, special,
+incidental, or consequential damages of any character arising as a
+result of this License or out of the use or inability to use the
+Work (including but not limited to damages for loss of goodwill,
+work stoppage, computer failure or malfunction, or any and all
+other commercial damages or losses), even if such Contributor
+has been advised of the possibility of such damages.
+<br></br>
+9. Accepting Warranty or Additional Liability. While redistributing
+the Work or Derivative Works thereof, You may choose to offer,
+and charge a fee for, acceptance of support, warranty, indemnity,
+or other liability obligations and/or rights consistent with this
+License. However, in accepting such obligations, You may act only
+on Your own behalf and on Your sole responsibility, not on behalf
+of any other Contributor, and only if You agree to indemnify,
+defend, and hold each Contributor harmless for any liability
+incurred by, or claims asserted against, such Contributor by reason
+of your accepting any such warranty or additional liability.
+<br></br>
+END OF TERMS AND CONDITIONS
+<br></br>
+APPENDIX: How to apply the Apache License to your work.
+<br></br>
+To apply the Apache License to your work, attach the following
+boilerplate notice, with the fields enclosed by brackets "[]"
+replaced with your own identifying information. (Don't include
+the brackets!)  The text should be enclosed in the appropriate
+comment syntax for the file format. We also recommend that a
+file or class name and description of purpose be included on the
+same "printed page" as the copyright notice for easier
+identification within third-party archives.
+<br></br>
+<strong>Copyright 2020 Timo Sarkar - Perlen Papier AG & BBZW Sursee</strong>
+<br></br>
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+<br></br>
+http://www.apache.org/licenses/LICENSE-2.0
+<br></br>
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+        </p>
+        <br>
+        <div class="toc">
+            <h2>Table of Contents</h2>
+            <ol>
+              <li>
+                <a href="index.html" title="Go to Learning to see">
+                  <span class="chapter">Abu Project 2020 - About</span>
+                  <span class="toc-page">01</span>
+                </a>
+              </li>
+        
+              <li><a href="partone.html" title=""><span class="chapter">Abu Project 2020 - Part 1</span>
+                <span class="toc-page">02</span></a>
+              </li>
+              <li><a href="parttwo.html" title=""><span class="chapter">Abu Project 2020 - Part 2</span>
+                <span class="toc-page">03</span></a>
+        
+                  <li><a href="licensing.html" title=""><span class="chapter"><strong><em>Abu project 2020 - Licensin</em></strong>g</span>
+                    <span class="toc-page">04</span></a></li>
+              </li>
+            </ol>
+          </div>
+        <br></br>
+        <!--  Profile Picture and Description  -->
+      </div>
+      
+      <!-- Second Parallax Image with Portfolio Text --><!--
+      <div class="bgimg-2 w3-display-container" id="portfolio">
+        <div class="w3-display-middle">
+          <span class="w3-xxlarge w3-text-light-grey w3-wide">PO</span>
+        </div>
+      </div>
+      
+      <div class="w3-content w3-container w3-padding-64">
+        <h2 class="w3-center">MYK</h2>
+        <p class="w3-center"><em>Her<br> Click on the images to make them bigger</em></p><br>
+      
+        <div class="w3-row-padding w3-center">
+          <div class="w3-col m3">
+            <img src="https://unsplash.om" style="width:100%" onclick="onClick(this)" class="w3-hover-opacity">
+          </div>
+      
+          <div class="w3-col m3">
+            <img src="https://unspl01?random" style="width:100%" onclick="onClick(this)" class="w3-hover-opacity">
+          </div>
+      
+          <div class="w3-col m3">
+            <img src="https://?random" style="width:100%" onclick="onClick(this)" class="w3-hover-opacity">
+          </div>
+      
+          <div class="w3-col m3">
+            <img src="https://unsplndom" style="width:100%" onclick="onClick(this)" class="w3-hover-opacity">
+          </div>
+        </div>
+      
+        <div class="w3-row-padding w3-center w3-section">
+          <div class="w3-col m3">
+            <img src="https://random" style="width:100%" onclick="onClick(this)" class="w3-hover-opacity">
+          </div>
+      
+          <div class="w3-col m3">
+            <img src="https://urandom" style="width:100%" onclick="onClick(this)" class="w3-hover-opacity">
+          </div>
+      
+          <div class="w3-col m3">
+            <img src="https://unndom" style="width:100%" onclick="onClick(this)" class="w3-hover-opacity">
+          </div>
+      
+          <div class="w3-col m3">
+            <img src="https://urandom" style="width:100%" onclick="onClick(this)" class="w3-hover-opacity">
+          </div>
+        </div>
+      </div>
+      
+      <div id="modal01" class="w3-modal w3-black" onclick="this.style.display='none'">
+        <span class="w3-closebtn w3-hover-red w3-text-white w3-xxxlarge w3-container w3-display-topright">×</span>
+        <div class="w3-modal-content w3-animate-zoom w3-center w3-transparent w3-padding-64">
+          <img id="img01" style="max-width:100%">
+        </div>
+      </div>
+      
+      <div class="bgimg-3 w3-display-container" id="contact">
+        <div class="w3-display-middle">
+          <h2 class="w3-xxlarge w3-text-light-grey w3-wide">CT</h2>
+        </div>
+      </div>
+      
+      <div class="w3-content w3-container w3-padding-64">
+        <h3 class="w3-center">WHERK</h3>
+        <p class="w3-center"><em>I'd loveack!</em></p>
+      
+       
+      </div>
+      
+      -->
+      <footer class="w3-center w3-dark-grey w3-padding-48 w3-hover-black cf">
+        <div class="w3-half">
+          <a target="_blank" href="">
+          </a>
+          <a target="_blank" href="/">
+          </a>
+        </div>
+        <p class="w3-half">Made with <span class="heart-icon">❤</span> by Timo Sarkar and Powered by <a href="https://expressjs.com/" title="express.js" target="_blank" class="w3-hover-opacity">express.js</a></p>
+      </footer>
+    </div>
+    
